@@ -551,7 +551,9 @@ class ModernJARVIS:
                     pdf_reader = PdfReader(pdf_file)
                     for i, page in enumerate(pdf_reader.pages):
                         page_text = page.extract_text()
-                        if page_text: extracted_text += f"[Page {i+1}]\n{re.sub(r'\s+', ' ', page_text).strip()}\n\n"
+                        if page_text:
+                            cleaned_text = re.sub(r'\s+', ' ', page_text).strip()
+                            extracted_text += f"[Page {i+1}]\n{cleaned_text}\n\n"
             elif file_lower.endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif', '.tiff')):
                 try: extracted_text = pytesseract.image_to_string(Image.open(temp_filepath), timeout=30)
                 except (pytesseract.TesseractError, RuntimeError) as ocr_err: extracted_text = f"[OCR Error: {str(ocr_err)}]"
@@ -5413,7 +5415,6 @@ PLAN_HTML =  """
             justify-content: center;
             align-items: stretch; /* Makes cards same height if in a row */
             flex-wrap: wrap;
-            gap: 2rem;
             padding: 3rem 1rem;
             max-width: 1200px;
             width: 100%;
