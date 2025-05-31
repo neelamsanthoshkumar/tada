@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+*.log
+uploads_jarvis/
+tts_jarvis/
+generated_images_jarvis/
+.DS_Store 
